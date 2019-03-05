@@ -2,13 +2,9 @@ import React, { PureComponent } from "react";
 //import PropTypes from 'prop-types';
 
 export class UserList extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      users: []
-    };
-  }
+  state = {
+    users: []
+  };
 
   // static propTypes = {
   //     users: PropTypes.arrayOf(
@@ -21,13 +17,13 @@ export class UserList extends PureComponent {
   // }
 
   addUser = (firstName, lastName) => {
-    this.setState(({ users: oldUsers }) => ({
+    this.setState(({ users }) => ({
       users: [
-        ...oldUsers,
+        ...users,
         {
-          id: oldUsers.length,
-          firstName: firstName,
-          lastName: lastName
+          id: users.length,
+          firstName,
+          lastName
         }
       ]
     }));
@@ -44,7 +40,9 @@ export class UserList extends PureComponent {
           ))}
         </ul>
         <button onClick={() => this.addUser("Arya", "Stark")}>user 1</button>
-        <button onClick={() => this.addUser("Daenerys", "demo")}>user 2</button>
+        <button onClick={() => this.addUser("Daenerys", "Targaryen")}>
+          user 2
+        </button>
       </div>
     );
   }

@@ -1,12 +1,6 @@
+import React from "react";
+import ReactDOM from "react-dom";
 
-import 'babel-polyfill';
+import Root from "modules/root/components/root";
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-
-import Root from 'modules/root/components/root';
-
-ReactDOM.render(
-        <Root />,
-    document.getElementById('root')
-);
+ReactDOM.render(<Root />, document.getElementById("root"));
