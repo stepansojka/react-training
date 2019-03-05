@@ -1,12 +1,8 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
-export class Header extends PureComponent {
-  static propTypes = {
-    title: PropTypes.string.isRequired
-  };
+export const Header = ({ title }) => <h1>{title}</h1>;
 
-  render() {
-    return <h1>{this.props.title}</h1>;
-  }
-}
+Header.propTypes = {
+  title: PropTypes.string.isRequired
+};
