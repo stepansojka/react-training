@@ -34,11 +34,9 @@ DumbUserList.propTypes = {
   ).isRequired
 };
 
-const mapStateToProps = ({ user }) => {
-  return {
-    users: user.users
-  };
-};
+const mapStateToProps = ({ user: { users } }) => ({
+  users
+});
 
 const mapDispatchToProps = {
   addUser

@@ -8,8 +8,8 @@ DumbHeader.propTypes = {
   title: PropTypes.string.isRequired
 };
 
-const mapStateToProps = ({ header }) => ({
-  title: header.title
+const mapStateToProps = ({ header: { title } }) => ({
+  title
 });
 
 export const Header = connect(mapStateToProps)(DumbHeader);
