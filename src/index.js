@@ -3,25 +3,27 @@ import ReactDOM from "react-dom";
 
 import { Root } from "modules/root/components/root";
 
-let users = [];
+import { createStore } from "redux";
+import { rootReducer } from "modules/root/root-reducer";
+import { addUser } from "modules/users/user-actions";
 
-const render = () =>
-  ReactDOM.render(
-    <Root title="hello, world!" users={users} addUser={addUser} />,
+const dispatchAddUser = user => store.dispatch(addUser(user));
+
+const render = state => {
+  console.log(state);
+  return ReactDOM.render(
+    <Root title="test" users={state.user.users} addUser={dispatchAddUser} />,
     document.getElementById("root")
   );
-
-const addUser = (firstName, lastName) => {
-  users = [
-    ...users,
-    {
-      id: users.length,
-      firstName,
-      lastName
-    }
-  ];
-
-  render();
 };
 
-render();
+const store = createStore(
+  rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__
+    ? window.__REDUX_DEVTOOLS_EXTENSION__()
+    : v => v
+);
+
+store.subscribe(() => render(store.getState()));
+
+render(store.getState());
