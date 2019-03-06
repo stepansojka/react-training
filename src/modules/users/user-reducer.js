@@ -1,6 +1,6 @@
 import { createReducer } from "reduxsauce";
 
-import { ADD_USER } from "modules/users/user-actions";
+import { UserActionTypes } from "modules/users/user-actions";
 
 const initState = {
   users: []
@@ -11,7 +11,7 @@ const addUser = ({ users }, { user }) => ({
 });
 
 const handlers = {
-  [ADD_USER]: addUser
+  [UserActionTypes.ADD_USER]: addUser
 };
 
 export const userReducer = createReducer(initState, handlers);

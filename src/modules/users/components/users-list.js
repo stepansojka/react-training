@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { addUser } from "modules/users/user-actions";
+import { UserActionCreators } from "modules/users/user-actions";
 
 const DumbUserList = ({ users, addUser }) => (
   <div>
@@ -39,7 +39,7 @@ const mapStateToProps = ({ user: { users } }) => ({
 });
 
 const mapDispatchToProps = {
-  addUser
+  addUser: UserActionCreators.addUser
 };
 
 export const UserList = connect(

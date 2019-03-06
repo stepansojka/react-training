@@ -1,9 +1,9 @@
 import { createActions } from "reduxsauce";
 
-const { Types, Creators } = createActions({
+const Actions = createActions({
   addUser: ["user"]
 });
 
-export const ADD_USER = Types.ADD_USER;
+export const UserActionTypes = Actions.Types;
 
-export const addUser = Creators.addUser;
+export const UserActionCreators = Actions.Creators;
