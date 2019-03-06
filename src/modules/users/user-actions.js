@@ -1,6 +1,9 @@
-export const ADD_USER = Symbol("ADD_USER");
+import { createActions } from "reduxsauce";
 
-export const addUser = user => ({
-  type: ADD_USER,
-  payload: user
+const { Types, Creators } = createActions({
+  addUser: ["user"]
 });
+
+export const ADD_USER = Types.ADD_USER;
+
+export const addUser = Creators.addUser;
