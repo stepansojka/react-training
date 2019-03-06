@@ -10,8 +10,14 @@ export const UserList = ({ users, addUser }) => (
         </li>
       ))}
     </ul>
-    <button onClick={() => addUser("Arya", "Stark")}>user 1</button>
-    <button onClick={() => addUser("Daenerys", "Targaryen")}>user 2</button>
+    <button onClick={() => addUser({ firstName: "Arya", lastName: "Stark" })}>
+      user 1
+    </button>
+    <button
+      onClick={() => addUser({ firstName: "Daenerys", lastName: "Targaryen" })}
+    >
+      user 2
+    </button>
   </div>
 );
 
