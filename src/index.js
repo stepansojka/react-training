@@ -9,13 +9,11 @@ import { addUser } from "modules/users/user-actions";
 
 const dispatchAddUser = user => store.dispatch(addUser(user));
 
-const render = state => {
-  console.log(state);
-  return ReactDOM.render(
+const render = state =>
+  ReactDOM.render(
     <Root title="test" users={state.user.users} addUser={dispatchAddUser} />,
     document.getElementById("root")
   );
-};
 
 const store = createStore(
   rootReducer,
