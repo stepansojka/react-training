@@ -1,13 +1,18 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 
 const app = express();
+const jsonParser = bodyParser.json();
 
-const users = [];
+let users = [];
 
 app.get("/users", (req, res) => res.json(users));
 
-app.post("/users", (req, res) => {
-  users = [...users, { ...user, id: users.length }];
+app.post("/users", jsonParser, (req, res) => {
+  user = { ...req.body, id: users.length };
+  users = [...users, user];
+
+  res.json(user);
 });
 
 app.listen(3001);
