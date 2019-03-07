@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import { UserActionCreators } from "modules/users/user-actions";
+import { getUserList } from "modules/users/user-selectors";
 
 const DumbUserList = ({ users, addUser }) => (
   <div>
@@ -34,8 +35,8 @@ DumbUserList.propTypes = {
   ).isRequired
 };
 
-const mapStateToProps = ({ user: { users } }) => ({
-  users
+const mapStateToProps = state => ({
+  users: getUserList(state)
 });
 
 const mapDispatchToProps = {
