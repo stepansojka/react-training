@@ -1,7 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-export const UserList = ({ users, addUser }) => (
+import { UserActionCreators } from "modules/users/user-actions";
+
+const DumbUserList = ({ users, addUser }) => (
   <div>
     <ul>
       {users.map(user => (
@@ -21,7 +24,7 @@ export const UserList = ({ users, addUser }) => (
   </div>
 );
 
-UserList.propTypes = {
+DumbUserList.propTypes = {
   users: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -30,3 +33,16 @@ UserList.propTypes = {
     }).isRequired
   ).isRequired
 };
+
+const mapStateToProps = ({ user: { users } }) => ({
+  users
+});
+
+const mapDispatchToProps = {
+  addUser: UserActionCreators.addUser
+};
+
+export const UserList = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DumbUserList);

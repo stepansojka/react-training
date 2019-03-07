@@ -1,8 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-export const Header = ({ title }) => <h1>{title}</h1>;
+const DumbHeader = ({ title }) => <h1>{title}</h1>;
 
-Header.propTypes = {
+DumbHeader.propTypes = {
   title: PropTypes.string.isRequired
 };
+
+const mapStateToProps = ({ header: { title } }) => ({
+  title
+});
+
+export const Header = connect(mapStateToProps)(DumbHeader);

@@ -1,16 +1,17 @@
-import { ADD_USER } from "modules/users/user-actions";
+import { createReducer } from "reduxsauce";
+
+import { UserActionTypes } from "modules/users/user-actions";
 
 const initState = {
   users: []
 };
 
-export const userReducer = ({ users } = initState, action) => {
-  switch (action.type) {
-    case ADD_USER:
-      return {
-        users: [...users, { ...action.payload, id: users.length }]
-      };
-    default:
-      return { users };
-  }
+const addUser = ({ users }, { user }) => ({
+  users: [...users, { ...user, id: users.length }]
+});
+
+const handlers = {
+  [UserActionTypes.ADD_USER]: addUser
 };
+
+export const userReducer = createReducer(initState, handlers);
