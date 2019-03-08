@@ -6,12 +6,13 @@ const initState = {
   users: []
 };
 
-const addUser = ({ users }, { user }) => ({
-  users: [...users, { ...user, id: users.length }]
+const usersLoaded = (state, { users }) => ({
+  ...state,
+  users
 });
 
 const handlers = {
-  [UserActionTypes.ADD_USER]: addUser
+  [UserActionTypes.USERS_LOADED]: usersLoaded
 };
 
 export const userReducer = createReducer(initState, handlers);
