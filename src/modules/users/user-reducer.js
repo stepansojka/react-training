@@ -6,7 +6,8 @@ const initState = {
   users: []
 };
 
-const usersLoaded = (_, { users }) => ({
+const usersLoaded = (state, { users }) => ({
+  ...state,
   users
 });
 
