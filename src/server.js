@@ -56,6 +56,7 @@ app.get("/users", (req, res) => res.json(users));
 
 app.post("/users", (req, res) => {
   const user = createUser(req.body);
+
   users = [...users, user];
 
   res.json(user);
