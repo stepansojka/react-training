@@ -10,17 +10,17 @@ const DumbUserList = ({ users, addUser }) => (
     <ul>
       {users.map(user => (
         <li key={user.id}>
-          {user.firstName} {user.lastName}
+          {user.firstName} {user.regnalNumber} {user.lastName}
         </li>
       ))}
     </ul>
-    <button onClick={() => addUser({ firstName: "Arya", lastName: "Stark" })}>
-      user 1
-    </button>
     <button
-      onClick={() => addUser({ firstName: "Daenerys", lastName: "Targaryen" })}
+      onClick={() => addUser({ firstName: "Homer", lastName: "Simpson" })}
     >
-      user 2
+      Homer
+    </button>
+    <button onClick={() => addUser({ firstName: "Lisa", lastName: "Simpson" })}>
+      Lisa
     </button>
   </div>
 );
