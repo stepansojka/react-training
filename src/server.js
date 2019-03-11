@@ -52,7 +52,7 @@ const createUser = ({ firstName, lastName }) => {
   };
 };
 
-app.get("/users", (req, res) => res.json({ users }));
+app.get("/users", (req, res) => res.json(users));
 
 app.post("/users", (req, res) => {
   const user = createUser(req.body);

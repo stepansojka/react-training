@@ -16,4 +16,4 @@ export const user = new Entity("users", {
   skills: [userSkill]
 });
 
-export const users = { users: [user] };
+export const users = [user];

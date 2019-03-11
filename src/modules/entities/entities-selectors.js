@@ -15,6 +15,6 @@ export const getUsers = createSelector(
 
     if (ids.length === 0) return [];
 
-    return r.users;
+    return r;
   }
 );

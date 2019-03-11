@@ -18,7 +18,8 @@ function* addUser({ user }) {
 function* fetchUsers() {
   try {
     const users = yield call(Api.fetchUsers);
-    const result = yield call(() => normalizeAndStore(users, userSchema));
+
+    const result = yield call(normalizeAndStore, users, userSchema);
 
     yield put(UserActionCreators.usersLoaded(result));
   } catch (e) {
