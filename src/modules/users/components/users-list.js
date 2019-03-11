@@ -28,9 +28,10 @@ const DumbUserList = ({ users, addUser }) => (
 DumbUserList.propTypes = {
   users: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
       firstName: PropTypes.string.isRequired,
-      lastName: PropTypes.string.isRequired
+      lastName: PropTypes.string.isRequired,
+      regnalNumber: PropTypes.string.isRequired
     }).isRequired
   ).isRequired
 };

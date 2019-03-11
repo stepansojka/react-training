@@ -4,10 +4,6 @@ const { Entity } = schema;
 
 const skill = new Entity("skills");
 
-const user = new Entity("users", {
-  skills: [skill]
-});
-
 const userSkill = new Entity(
   "userSkills",
   { skill },
@@ -15,3 +11,9 @@ const userSkill = new Entity(
     idAttribute: (value, parent) => parent.id + "-" + value.skill.id
   }
 );
+
+export const user = new Entity("users", {
+  skills: [userSkill]
+});
+
+export const users = { users: [user] };
