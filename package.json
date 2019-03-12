@@ -3,8 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@salsita/react-api": "^1.0.0",
     "@salsita/react-core": "^1.0.0",
+    "@salsita/react-crud": "^1.0.1",
     "@salsita/react-entities": "^1.0.0",
+    "@salsita/react-router": "^1.0.1",
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "body-parser": "^1.18.3",
@@ -18,7 +21,8 @@
     "redux-saga": "^1.0.2",
     "reduxsauce": "^1.0.1",
     "reselect": "^4.0.0",
-    "roman-numerals": "^0.3.2"
+    "roman-numerals": "^0.3.2",
+    "router5-helpers": "^7.0.1"
   },
   "scripts": {
     "start": "concurrently \"npm run start-be\" \"npm run start-fe\"",
