@@ -54,6 +54,12 @@ const createUser = ({ firstName, lastName }) => {
 
 const getUser = id => users.find(user => user.id === id);
 
+const skillsById = skills =>
+  skills.reduce((skills, { skill }) => {
+    skills[skill.id] = skill;
+    return skills;
+  }, {});
+
 app.get("/users", (req, res) => res.json(users));
 
 app.get("/users/:id", (req, res) => res.json(getUser(req.params.id)));
@@ -65,6 +71,18 @@ app.patch("users/:id", (req, res) => {
     ...users[i],
     ...req.body
   };
+});
+
+app.get("/skills", (req, res) => {
+  const skills = users.reduce(
+    (skills, user) => ({
+      ...skills,
+      ...skillsById(user.skills)
+    }),
+    {}
+  );
+
+  res.json(Object.values(skills));
 });
 
 app.post("/users", (req, res) => {
