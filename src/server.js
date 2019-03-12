@@ -28,7 +28,7 @@ const userSkill = (skill, regnalNumber) => ({
 });
 
 const getSkills = (name, regnalNumber) => {
-  skills =
+  const skills =
     name.toLowerCase() === "lisa" ? [saxophonePlaying, reading] : [donutEating];
 
   return skills.map(skill => userSkill(skill, regnalNumber));
