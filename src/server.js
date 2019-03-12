@@ -52,7 +52,11 @@ const createUser = ({ firstName, lastName }) => {
   };
 };
 
+const getUser = id => users.find(user => user.id === id);
+
 app.get("/users", (req, res) => res.json(users));
+
+app.get("/users/:id", (req, res) => res.json(getUser(req.params.id)));
 
 app.post("/users", (req, res) => {
   const user = createUser(req.body);
