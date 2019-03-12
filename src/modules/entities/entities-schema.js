@@ -8,7 +8,7 @@ const userSkill = new Entity(
   "userSkills",
   { skill },
   {
-    idAttribute: (value, parent) => parent.id + "-" + value.skill.id
+    idAttribute: (value, parent) => parent.id + "_" + value.skill.id
   }
 );
 

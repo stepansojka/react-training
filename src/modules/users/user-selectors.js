@@ -5,12 +5,21 @@ import { getUsers } from "modules/entities/entities-selectors";
 
 export const getTitle = state => state.header.title;
 
-export const getUserList = createSelector(
+const getUserIds = state => state.user.users;
+
+const getVisibleUsers = createSelector(
+  getUserIds,
   getUsers,
-  users =>
-    users.map(user => ({
+  (ids, users) => ids.map(id => users[id])
+);
+
+export const getUserList = createSelector(
+  getVisibleUsers,
+  users => {
+    return users.map(user => ({
       ...user,
       lastName: user.lastName.toUpperCase(),
       regnalNumber: toRoman(user.regnalNumber)
-    }))
+    }));
+  }
 );
