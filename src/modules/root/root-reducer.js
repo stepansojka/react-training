@@ -12,6 +12,6 @@ export const rootReducer = combineReducers({
   header: headerReducer,
   entities: entitiesReducer,
   api: apiReducer,
-  // crud: crudReducer,
+  //crud: crudReducer,
   router: routerReducer
 });

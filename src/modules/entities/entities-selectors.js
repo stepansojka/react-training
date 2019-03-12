@@ -33,7 +33,7 @@ const getUserSkills = createSelector(
         userSkills[userId] = {
           skills: [
             ...userSkills[userId].skills,
-            { ...normalizedUserSkills[userId], skill: skills[skillId] }
+            { ...normalizedUserSkills[key], skill: skills[skillId] }
           ]
         };
       }
