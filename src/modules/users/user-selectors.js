@@ -1,5 +1,6 @@
 import { createSelector } from "reselect";
 import { toRoman } from "roman-numerals";
+import { RouterSelectors } from "@salsita/react-router";
 
 import { getUsers } from "modules/entities/entities-selectors";
 
@@ -13,13 +14,19 @@ const getVisibleUsers = createSelector(
   (ids, users) => ids.map(id => users[id])
 );
 
+const enrichUser = user => ({
+  ...user,
+  lastName: user.lastName.toUpperCase(),
+  regnalNumber: toRoman(user.regnalNumber)
+});
+
 export const getUserList = createSelector(
   getVisibleUsers,
-  users => {
-    return users.map(user => ({
-      ...user,
-      lastName: user.lastName.toUpperCase(),
-      regnalNumber: toRoman(user.regnalNumber)
-    }));
-  }
+  users => users.map(enrichUser)
+);
+
+export const getSelectedUser = createSelector(
+  getUsers,
+  RouterSelectors.getRouteParams,
+  (users, params) => enrichUser(users[params.id])
 );

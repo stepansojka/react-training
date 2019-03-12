@@ -1,22 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
-import createSagaMiddleware from "redux-saga";
-import { composeWithDevTools } from "redux-devtools-extension";
+import { buildRouter } from "@salsita/react-router";
+import { buildStore } from "@salsita/react-core";
 
 import { Root } from "modules/root/components/root";
 import { rootReducer } from "modules/root/root-reducer";
 import { rootSaga } from "modules/root/root-saga";
+import * as routes from "router/routes";
 
-const sagaMiddleware = createSagaMiddleware();
+const router = buildRouter([routes.USER_LIST, routes.USER_DETAIL], {
+  defaultRoute: routes.USER_LIST.name
+});
 
-const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(sagaMiddleware))
-);
+router.start();
 
-sagaMiddleware.run(rootSaga);
+const store = buildStore(rootReducer, rootSaga, router);
 
 ReactDOM.render(
   <Provider store={store}>

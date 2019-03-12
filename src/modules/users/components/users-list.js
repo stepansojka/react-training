@@ -1,16 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Link } from "@salsita/react-router";
 
 import { UserActionCreators } from "modules/users/user-actions";
 import { getUserList } from "modules/users/user-selectors";
+import { USER_DETAIL } from "router/routes";
 
 const DumbUserList = ({ users, addUser }) => (
   <div>
     <ul>
       {users.map(user => (
         <li key={user.id}>
-          {user.firstName} {user.regnalNumber} {user.lastName}
+          <Link name={USER_DETAIL.name} params={{ id: user.id }}>
+            {user.firstName} {user.regnalNumber} {user.lastName}
+          </Link>
         </li>
       ))}
     </ul>
