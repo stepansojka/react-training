@@ -58,6 +58,15 @@ app.get("/users", (req, res) => res.json(users));
 
 app.get("/users/:id", (req, res) => res.json(getUser(req.params.id)));
 
+app.patch("users/:id", (req, res) => {
+  const i = users.indexOf(user => user.id === req.params.id);
+
+  users[i] = {
+    ...users[i],
+    ...req.body
+  };
+});
+
 app.post("/users", (req, res) => {
   const user = createUser(req.body);
 
