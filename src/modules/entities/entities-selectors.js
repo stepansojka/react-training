@@ -24,19 +24,11 @@ const getUserSkills = createSelector(
     if (!normalizedUserSkills) return {};
 
     return Object.keys(normalizedUserSkills).reduce((userSkills, key) => {
-      const [userId, skillId] = key.split("_");
-      if (!(userId in userSkills)) {
-        userSkills[userId] = {
-          skills: [{ ...normalizedUserSkills[key], skill: skills[skillId] }]
-        };
-      } else {
-        userSkills[userId] = {
-          skills: [
-            ...userSkills[userId].skills,
-            { ...normalizedUserSkills[key], skill: skills[skillId] }
-          ]
-        };
-      }
+      const normalizedSkill = normalizedUserSkills[key];
+      userSkills[key] = {
+        ...normalizedSkill,
+        skill: skills[normalizedSkill.skill]
+      };
 
       return userSkills;
     }, {});
@@ -50,7 +42,12 @@ export const getUsers = createSelector(
     if (!normalizedUsers) return {};
 
     return Object.keys(normalizedUsers).reduce((users, key) => {
-      users[key] = { ...normalizedUsers[key], ...userSkills[key] };
+      const normalizedUser = normalizedUsers[key];
+      users[key] = {
+        ...normalizedUser,
+        skills: normalizedUser.skills.map(skillId => userSkills[skillId])
+      };
+
       return users;
     }, {});
   }
