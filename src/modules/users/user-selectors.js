@@ -15,11 +15,10 @@ const getVisibleUsers = createSelector(
 
 export const getUserList = createSelector(
   getVisibleUsers,
-  users => {
-    return users.map(user => ({
+  users =>
+    users.map(user => ({
       ...user,
       lastName: user.lastName.toUpperCase(),
       regnalNumber: toRoman(user.regnalNumber)
-    }));
-  }
+    }))
 );
