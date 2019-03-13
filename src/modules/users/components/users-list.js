@@ -5,7 +5,9 @@ import { Link } from "@salsita/react-router";
 
 import { UserActionCreators } from "modules/users/user-actions";
 import { getUserList } from "modules/users/user-selectors";
+
 import { USER_DETAIL } from "modules/router/routes";
+import { UserCreate } from "modules/users/components/user-create";
 
 const DumbUserList = ({ users, addUser }) => (
   <div>
@@ -26,6 +28,8 @@ const DumbUserList = ({ users, addUser }) => (
     <button onClick={() => addUser({ firstName: "Lisa", lastName: "Simpson" })}>
       Lisa
     </button>
+
+    <UserCreate />
   </div>
 );
 

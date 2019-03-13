@@ -1,4 +1,4 @@
-import { addUser, fetchUser, fetchUsers } from "modules/users/user-effects";
+import { saveUser, fetchUser, fetchUsers } from "modules/users/user-effects";
 import { RouterSelectors } from "@salsita/react-router";
 
 import { user, users } from "modules/entities/entities-schema";
@@ -9,7 +9,7 @@ export const mapEntityToSaveParams = (entity, isUpdate) => {
   switch (entity) {
     case USER:
       return {
-        effect: addUser,
+        effect: saveUser,
         schema: user
       };
     default:
