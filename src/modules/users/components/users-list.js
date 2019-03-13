@@ -45,7 +45,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  addUser: UserActionCreators.addUser
+  addUser: UserActionCreators.saveUser
 };
 
 export const UserList = connect(

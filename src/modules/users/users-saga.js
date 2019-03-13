@@ -25,5 +25,5 @@ function* fetchUsers() {
 
 export function* userSaga() {
   yield fork(fetchUsers);
-  yield takeEvery(UserActionTypes.ADD_USER, saveUser);
+  yield takeEvery(UserActionTypes.SAVE_USER, saveUser);
 }
