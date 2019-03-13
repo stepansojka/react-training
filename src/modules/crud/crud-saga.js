@@ -1,4 +1,4 @@
-import { addUser, fetchUsers } from "modules/users/user-effects";
+import { saveUser, fetchUsers } from "modules/users/user-effects";
 import { user, users } from "modules/entities/entities-schema";
 import { USER, USER_LIST } from "modules/crud/crud-entities";
 
@@ -6,7 +6,7 @@ export const mapEntityToSaveParams = (entity, isUpdate) => {
   switch (entity) {
     case USER:
       return {
-        effect: addUser,
+        effect: saveUser,
         schema: user
       };
     default:
