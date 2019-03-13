@@ -1,14 +1,18 @@
-import { call, fork, put, takeEvery } from "redux-saga/effects";
-import { normalizeAndStore } from "@salsita/react-entities";
+import { call, fork, takeEvery } from "redux-saga/effects";
+import { saveEntity, fetchEntities } from "@salsita/react-crud";
 
-import * as Api from "modules/users/user-effects";
 import { UserActionTypes } from "modules/users/user-actions";
-import { UserActionCreators } from "modules/users/user-actions";
-import { users as userSchema } from "modules/entities/entities-schema";
 
-function* addUser({ user }) {
+import { USER, USER_LIST } from "modules/crud/crud-entities";
+import {
+  mapEntityToSaveParams,
+  mapRouteToFetchParams
+} from "modules/crud/crud-saga";
+
+function* saveUser({ user }) {
   try {
-    yield call(Api.addUser, user);
+    yield call(saveEntity, user, USER, mapEntityToSaveParams);
+
     yield fork(fetchUsers);
   } catch (e) {
     console.error(e);
@@ -16,18 +20,10 @@ function* addUser({ user }) {
 }
 
 function* fetchUsers() {
-  try {
-    const users = yield call(Api.fetchUsers);
-
-    const result = yield call(normalizeAndStore, users, userSchema);
-
-    yield put(UserActionCreators.usersLoaded(result));
-  } catch (e) {
-    console.error(e);
-  }
+  yield call(fetchEntities, USER_LIST, mapRouteToFetchParams);
 }
 
 export function* userSaga() {
   yield fork(fetchUsers);
-  yield takeEvery(UserActionTypes.ADD_USER, addUser);
+  yield takeEvery(UserActionTypes.ADD_USER, saveUser);
 }

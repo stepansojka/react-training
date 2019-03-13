@@ -1,8 +1,7 @@
 import { createActions } from "reduxsauce";
 
 const Actions = createActions({
-  addUser: ["user"],
-  usersLoaded: ["users"]
+  addUser: ["user"]
 });
 
 export const UserActionTypes = Actions.Types;

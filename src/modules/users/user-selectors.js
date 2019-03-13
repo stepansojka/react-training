@@ -1,18 +1,9 @@
 import { createSelector } from "reselect";
 import { toRoman } from "roman-numerals";
-import { RouterSelectors } from "@salsita/react-router";
 
-import { getUsers } from "modules/entities/entities-selectors";
+import { getVisibleUsers, getSelectedUser } from "modules/crud/crud-selectors";
 
 export const getTitle = state => state.header.title;
-
-const getUserIds = state => state.user.users;
-
-const getVisibleUsers = createSelector(
-  getUserIds,
-  getUsers,
-  (ids, users) => ids.map(id => users[id])
-);
 
 const enrichUser = user => ({
   ...user,
@@ -25,8 +16,7 @@ export const getUserList = createSelector(
   users => users.map(enrichUser)
 );
 
-export const getSelectedUser = createSelector(
-  getUsers,
-  RouterSelectors.getRouteParams,
-  (users, params) => enrichUser(users[params.id])
+export const getCurrentUser = createSelector(
+  getSelectedUser,
+  user => enrichUser(user)
 );

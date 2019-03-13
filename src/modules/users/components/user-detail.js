@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "@salsita/react-router";
 
-import { getSelectedUser } from "modules/users/user-selectors";
+import { getCurrentUser } from "modules/users/user-selectors";
 import { USER_LIST } from "router/routes";
 
 const DumbUserDetail = ({ user }) => (
@@ -32,7 +32,7 @@ DumbUserDetail.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  user: getSelectedUser(state)
+  user: getCurrentUser(state)
 });
 
 export const UserDetail = connect(mapStateToProps)(DumbUserDetail);

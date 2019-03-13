@@ -1,6 +1,7 @@
+import { wrapApiCall } from "@salsita/react-api";
+
 import { ApiClient } from "modules/api/api-client";
 
-export const fetchUsers = () =>
-  ApiClient.get("/users").then(response => response.data);
+export const fetchUsers = wrapApiCall(() => ApiClient.get("/users"));
 
-export const addUser = user => ApiClient.post("/users", user);
+export const addUser = wrapApiCall(user => ApiClient.post("/users", user));
