@@ -9,6 +9,8 @@ export const mapEntityToSaveParams = (entity, isUpdate) => {
         effect: addUser,
         schema: user
       };
+    default:
+      return {};
   }
 };
 
@@ -21,5 +23,7 @@ export const mapRouteToFetchParams = route => {
           schema: users
         }
       };
+    default:
+      return {};
   }
 };
