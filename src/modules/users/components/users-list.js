@@ -20,15 +20,6 @@ const DumbUserList = ({ users, addUser }) => (
         </li>
       ))}
     </ul>
-    <button
-      onClick={() => addUser({ firstName: "Homer", lastName: "Simpson" })}
-    >
-      Homer
-    </button>
-    <button onClick={() => addUser({ firstName: "Lisa", lastName: "Simpson" })}>
-      Lisa
-    </button>
-
     <UserCreate />
   </div>
 );
