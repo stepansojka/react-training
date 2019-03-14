@@ -5,8 +5,10 @@ import { Link } from "@salsita/react-router";
 
 import { getCurrentUser } from "modules/users/user-selectors";
 import { USER_LIST } from "modules/router/routes";
+import { UserForm } from "modules/users/components/user-form";
+import { UserActionCreators } from "modules/users/user-actions";
 
-const DumbUserDetail = ({ user }) => {
+const DumbUserDetail = ({ user, saveUser }) => {
   if (!user) {
     return (
       <div>
@@ -14,21 +16,7 @@ const DumbUserDetail = ({ user }) => {
       </div>
     );
   } else {
-    return (
-      <div>
-        <h1>
-          {user.firstName} {user.regnalNumber} {user.lastName}
-        </h1>
-        <ul>
-          {user.skills.map(skill => (
-            <li key={user.id + "_" + skill.skill.id}>
-              {skill.skill.name}: level {skill.level}
-            </li>
-          ))}
-        </ul>
-        <Link name={USER_LIST.name}>BACK</Link>
-      </div>
-    );
+    return <UserForm onSubmit={saveUser} />;
   }
 };
 
@@ -51,7 +39,8 @@ DumbUserDetail.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  user: getCurrentUser(state)
+  user: getCurrentUser(state),
+  saveUser: UserActionCreators.saveUser
 });
 
 export const UserDetail = connect(mapStateToProps)(DumbUserDetail);
