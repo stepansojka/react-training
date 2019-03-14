@@ -7,10 +7,10 @@ import { buildStore } from "@salsita/react-core";
 import { Root } from "modules/root/components/root";
 import { rootReducer } from "modules/root/root-reducer";
 import { rootSaga } from "modules/root/root-saga";
-import * as routes from "router/routes";
+import * as Routes from "modules/router/routes";
 
-const router = buildRouter([routes.USER_LIST, routes.USER_DETAIL], {
-  defaultRoute: routes.USER_LIST.name
+const router = buildRouter(Routes.ROUTES, {
+  defaultRoute: Routes.USER_LIST.name
 });
 
 router.start();

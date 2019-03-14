@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "@salsita/react-router";
 
 import { getCurrentUser } from "modules/users/user-selectors";
-import { USER_LIST } from "router/routes";
+import { USER_LIST } from "modules/router/routes";
 
 const DumbUserDetail = ({ user }) => (
   <div>

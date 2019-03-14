@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { RouterSelectors } from "@salsita/react-router";
 
-import { USER_DETAIL } from "router/routes";
+import { USER_DETAIL } from "modules/router/routes";
 import { UserList } from "modules/users/components/users-list";
 import { UserDetail } from "modules/users/components/user-detail";
 
