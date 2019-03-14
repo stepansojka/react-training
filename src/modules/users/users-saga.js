@@ -9,17 +9,16 @@ import {
   mapRouteToFetchParams
 } from "modules/crud/crud-saga";
 
-function* saveUser({ user }) {
+export function* saveUser({ user }) {
   try {
     yield call(saveEntity, user, USER, mapEntityToSaveParams);
-
     yield fork(fetchUsers);
   } catch (e) {
     console.error(e);
   }
 }
 
-function* fetchUsers() {
+export function* fetchUsers() {
   yield call(fetchEntities, USER_LIST, mapRouteToFetchParams);
 }
 

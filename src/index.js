@@ -13,13 +13,13 @@ const router = buildRouter(Routes.ROUTES, {
   defaultRoute: Routes.USER_LIST.name
 });
 
-router.start();
-
 const store = buildStore(rootReducer, rootSaga, router);
 
-ReactDOM.render(
-  <Provider store={store}>
-    <Root />
-  </Provider>,
-  document.getElementById("root")
+router.start(() =>
+  ReactDOM.render(
+    <Provider store={store}>
+      <Root />
+    </Provider>,
+    document.getElementById("root")
+  )
 );

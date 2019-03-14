@@ -6,21 +6,31 @@ import { Link } from "@salsita/react-router";
 import { getCurrentUser } from "modules/users/user-selectors";
 import { USER_LIST } from "modules/router/routes";
 
-const DumbUserDetail = ({ user }) => (
-  <div>
-    <h1>
-      {user.firstName} {user.regnalNumber} {user.lastName}
-    </h1>
-    <ul>
-      {user.skills.map(skill => (
-        <li key={user.id + "_" + skill.skill.id}>
-          {skill.skill.name}: level {skill.level}
-        </li>
-      ))}
-    </ul>
-    <Link name={USER_LIST.name}>BACK</Link>
-  </div>
-);
+const DumbUserDetail = ({ user }) => {
+  if (!user) {
+    return (
+      <div>
+        user not found <br /> <Link name={USER_LIST.name}>BACK</Link>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <h1>
+          {user.firstName} {user.regnalNumber} {user.lastName}
+        </h1>
+        <ul>
+          {user.skills.map(skill => (
+            <li key={user.id + "_" + skill.skill.id}>
+              {skill.skill.name}: level {skill.level}
+            </li>
+          ))}
+        </ul>
+        <Link name={USER_LIST.name}>BACK</Link>
+      </div>
+    );
+  }
+};
 
 DumbUserDetail.propTypes = {
   user: PropTypes.shape({
@@ -37,7 +47,7 @@ DumbUserDetail.propTypes = {
         level: PropTypes.number.isRequired
       }).isRequired
     ).isRequired
-  }).isRequired
+  })
 };
 
 const mapStateToProps = state => ({

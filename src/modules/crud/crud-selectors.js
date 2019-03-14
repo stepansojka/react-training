@@ -9,11 +9,15 @@ const getUserIds = state =>
 export const getVisibleUsers = createSelector(
   getUserIds,
   getUsers,
-  (ids, users) => ids.map(id => users[id])
+  (ids, users) => {
+    return ids.map(id => users[id]);
+  }
 );
 
 export const getSelectedUser = createSelector(
   getUsers,
   RouterSelectors.getRouteParams,
-  (users, params) => users[params.id]
+  (users, params) => {
+    return users[params.id];
+  }
 );
