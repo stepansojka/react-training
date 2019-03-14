@@ -7,10 +7,6 @@ export const getTitle = state => state.header.title;
 
 const maybe = fn => arg => (arg ? fn(arg) : arg);
 
-// const maybe = fn => ...args => {
-
-// }arg ? fn(arg) : arg);
-
 const enrichUser = maybe(user => ({
   ...user,
   lastName: user.lastName.toUpperCase(),
