@@ -27,7 +27,16 @@ DumbUserDetail.propTypes = {
     id: PropTypes.string.isRequired,
     firstName: PropTypes.string.isRequired,
     lastName: PropTypes.string.isRequired,
-    regnalNumber: PropTypes.string.isRequired
+    regnalNumber: PropTypes.string.isRequired,
+    skills: PropTypes.arrayOf(
+      PropTypes.shape({
+        skill: PropTypes.shape({
+          id: PropTypes.string.isRequired,
+          name: PropTypes.string.isRequired
+        }),
+        level: PropTypes.number.isRequired
+      }).isRequired
+    ).isRequired
   }).isRequired
 };
 
