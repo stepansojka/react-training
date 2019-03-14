@@ -1,6 +1,9 @@
 import { saveUser, fetchUsers } from "modules/users/user-effects";
+
 import { user, users } from "modules/entities/entities-schema";
-import { USER, USER_LIST } from "modules/crud/crud-entities";
+import { USER } from "modules/crud/crud-entities";
+
+import * as Routes from "modules/router/routes";
 
 export const mapEntityToSaveParams = (entity, isUpdate) => {
   switch (entity) {
@@ -16,7 +19,14 @@ export const mapEntityToSaveParams = (entity, isUpdate) => {
 
 export const mapRouteToFetchParams = route => {
   switch (route) {
-    case USER_LIST:
+    case Routes.USER_LIST.name:
+      return {
+        users: {
+          effect: fetchUsers,
+          schema: users
+        }
+      };
+    case Routes.USER_DETAIL.name:
       return {
         users: {
           effect: fetchUsers,
