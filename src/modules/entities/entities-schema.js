@@ -17,3 +17,4 @@ export const user = new Entity("users", {
 });
 
 export const users = [user];
+export const skills = [skill];

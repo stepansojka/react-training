@@ -2,6 +2,7 @@ import { createSelector } from "reselect";
 import { toRoman } from "roman-numerals";
 
 import { getVisibleUsers, getSelectedUser } from "modules/crud/crud-selectors";
+import { getSkills } from "modules/entities/entities-selectors";
 
 export const getTitle = state => state.header.title;
 
@@ -12,6 +13,11 @@ const enrichUser = maybe(user => ({
   lastName: user.lastName.toUpperCase(),
   regnalNumber: toRoman(user.regnalNumber)
 }));
+
+export const getSkillList = createSelector(
+  getSkills,
+  skills => skills.map(skill => ({ label: skill.name, value: skill }))
+);
 
 export const getUserList = createSelector(
   getVisibleUsers,

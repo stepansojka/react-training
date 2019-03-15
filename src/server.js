@@ -22,6 +22,8 @@ const reading = {
   name: "reading philosophy books"
 };
 
+const allSkills = [donutEating, saxophonePlaying, reading];
+
 const userSkill = (skill, regnalNumber) => ({
   skill,
   level: Math.pow(2, regnalNumber)
@@ -54,36 +56,11 @@ const createUser = ({ firstName, lastName }) => {
 
 const getUser = id => users.find(user => user.id === id);
 
-const skillsById = skills =>
-  skills.reduce((skills, { skill }) => {
-    skills[skill.id] = skill;
-    return skills;
-  }, {});
-
 app.get("/users", (req, res) => res.json(users));
 
+app.get("/skills", (req, res) => res.json(allSkills));
+
 app.get("/users/:id", (req, res) => res.json(getUser(req.params.id)));
-
-app.patch("users/:id", (req, res) => {
-  const i = users.indexOf(user => user.id === req.params.id);
-
-  users[i] = {
-    ...users[i],
-    ...req.body
-  };
-});
-
-app.get("/skills", (req, res) => {
-  const skills = users.reduce(
-    (skills, user) => ({
-      ...skills,
-      ...skillsById(user.skills)
-    }),
-    {}
-  );
-
-  res.json(Object.values(skills));
-});
 
 app.post("/users", (req, res) => {
   const user = createUser(req.body);

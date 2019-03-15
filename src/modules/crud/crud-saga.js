@@ -1,7 +1,12 @@
-import { saveUser, fetchUser, fetchUsers } from "modules/users/user-effects";
+import {
+  saveUser,
+  fetchUser,
+  fetchUsers,
+  fetchSkills
+} from "modules/users/user-effects";
 import { RouterSelectors } from "@salsita/react-router";
 
-import { user, users } from "modules/entities/entities-schema";
+import { user, users, skills } from "modules/entities/entities-schema";
 import { USER } from "modules/crud/crud-entities";
 import * as Routes from "modules/router/routes";
 
@@ -24,6 +29,10 @@ export const mapRouteToFetchParams = route => {
         users: {
           effect: fetchUsers,
           schema: users
+        },
+        skills: {
+          effect: fetchSkills,
+          schema: skills
         }
       };
     case Routes.USER_DETAIL.name:
