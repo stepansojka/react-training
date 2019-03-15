@@ -7,6 +7,8 @@ import { UserList } from "modules/users/components/users-list";
 import { UserDetail } from "modules/users/components/user-detail";
 
 const DumbUsersRoute = ({ route }) => {
+  // TODO: Api Loader
+
   if (route && route.name === USER_DETAIL.name) {
     return <UserDetail />;
   }
