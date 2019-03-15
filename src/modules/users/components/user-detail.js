@@ -43,7 +43,7 @@ DumbUserDetail.propTypes = {
         skill: PropTypes.shape({
           id: PropTypes.string.isRequired,
           name: PropTypes.string.isRequired
-        }),
+        }).isRequired,
         level: PropTypes.number.isRequired
       }).isRequired
     ).isRequired
