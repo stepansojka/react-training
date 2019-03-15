@@ -16,7 +16,13 @@ const enrichUser = maybe(user => ({
 
 export const getSkillList = createSelector(
   getSkills,
-  skills => skills.map(skill => ({ label: skill.name, value: skill }))
+  skills =>
+    skills.map(skill => ({
+      label: skill.name,
+      name: skill.name,
+      value: skill,
+      id: skill.id
+    }))
 );
 
 export const getUserList = createSelector(
