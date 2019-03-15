@@ -29,20 +29,13 @@ const userSkill = (skill, regnalNumber) => ({
   level: Math.pow(2, regnalNumber)
 });
 
-const getSkills = (name, regnalNumber) => {
-  const skills =
-    name.toLowerCase() === "lisa" ? [saxophonePlaying, reading] : [donutEating];
-
-  return skills.map(skill => userSkill(skill, regnalNumber));
-};
-
 const computeRegnalNumber = name =>
   users.reduce(
     (count, user) => (user.firstName === name ? count + 1 : count),
     1
   );
 
-const createUser = ({ firstName, lastName }) => {
+const createUser = ({ firstName, lastName, skills }) => {
   const regnalNumber = computeRegnalNumber(firstName);
 
   return {
@@ -50,7 +43,7 @@ const createUser = ({ firstName, lastName }) => {
     firstName,
     lastName,
     regnalNumber,
-    skills: getSkills(firstName, regnalNumber)
+    skills: skills.map(skill => userSkill(skill, regnalNumber))
   };
 };
 
