@@ -18,10 +18,8 @@ export const getSkillList = createSelector(
   getSkills,
   skills =>
     skills.map(skill => ({
-      label: skill.name,
-      name: skill.name,
-      value: skill,
-      id: skill.id
+      ...skill,
+      label: skill.name
     }))
 );
 

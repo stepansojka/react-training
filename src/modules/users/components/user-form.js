@@ -16,19 +16,16 @@ const validateLastName = FormValidations.notEmptyString(
 
 const renderSkills = ({ fields, skills }) => (
   <div>
-    <FormFieldSelect
-      options={skills}
-      name="skill"
-      onChange={({ value }) => console.log(fields) || fields.push(value)}
-    />
     <ul>
-      {fields.map(
-        (field, index, fields) =>
-          fields.forEach(field => console.log(field)) || (
-            <li key={index}>{fields[index]}</li>
-          )
-      )}
+      {fields.map(field => (
+        <li key={field}>
+          <FormFieldSelect options={skills} name={field} />
+        </li>
+      ))}
     </ul>
+    <button type="button" onClick={() => fields.push({})}>
+      add skill
+    </button>
   </div>
 );
 
@@ -47,7 +44,7 @@ const UserFormInternal = ({ handleSubmit, skills }) => (
       label="last name"
     />
     <FieldArray name="skills" skills={skills} component={renderSkills} />
-    <button type="submit">Save</button>
+    <button type="submit">save</button>
   </form>
 );
 
