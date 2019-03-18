@@ -16,7 +16,7 @@ export function* saveUser({ user }) {
   try {
     yield call(saveEntity, user, USER, mapEntityToSaveParams);
     yield call(fetchUsers);
-    yield put(RouterActions.Creators.navigateTo(USER_LIST_ROUTE.NAME));
+    yield put(RouterActions.Creators.navigateTo(USER_LIST_ROUTE.name));
   } catch (e) {
     console.error(e);
   }
