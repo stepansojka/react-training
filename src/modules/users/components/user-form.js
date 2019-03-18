@@ -14,6 +14,19 @@ const validateLastName = FormValidations.notEmptyString(
   "last name cannot be empty"
 );
 
+const validateSkills = skills => {
+  if (!Boolean(skills)) {
+    return "a user has to have at least one skill";
+  }
+
+  const uniqueSkills = new Set(skills);
+  if (uniqueSkills.size < skills.length) {
+    return "skills have to be unique";
+  }
+
+  return undefined;
+};
+
 const renderSkills = ({ fields, skills }) => (
   <div>
     <ul>
@@ -43,7 +56,12 @@ const UserFormInternal = ({ handleSubmit, skills }) => (
       validate={validateLastName}
       label="last name"
     />
-    <FieldArray name="skills" skills={skills} component={renderSkills} />
+    <FieldArray
+      name="skills"
+      skills={skills}
+      component={renderSkills}
+      validate={validateSkills}
+    />
     <button type="submit">save</button>
   </form>
 );
@@ -51,6 +69,10 @@ const UserFormInternal = ({ handleSubmit, skills }) => (
 const mapStateToProps = state => ({
   skills: getSkillList(state)
 });
+
+// export const UserForm = connect(state => ({
+//   initialValues: { firstName: "emil" }
+// }))(reduxForm({ form: "user" })(connect(mapStateToProps)(UserFormInternal)));
 
 export const UserForm = reduxForm({ form: "user" })(
   connect(mapStateToProps)(UserFormInternal)
