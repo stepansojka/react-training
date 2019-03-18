@@ -17,7 +17,7 @@ const enrichSkills = maybe(skills =>
 
 const enrichUserSkills = maybe(skills =>
   skills.map(skill => ({
-    ...skill,
+    ...skill.skill,
     label: skill.skill.name
   }))
 );
