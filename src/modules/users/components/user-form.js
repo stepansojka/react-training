@@ -27,15 +27,26 @@ const validateSkills = skills => {
   return undefined;
 };
 
-const renderSkills = ({ fields, skills }) => (
+const validateSingleSkill = skill => {
+  if (skill && Object.keys(skill).length === 0) {
+    return "a skill has to be selected";
+  }
+};
+
+const renderSkills = ({ fields, skills, meta: { error, dirty } }) => (
   <div>
     <ul>
       {fields.map(field => (
         <li key={field}>
-          <FormFieldSelect options={skills} name={field} />
+          <FormFieldSelect
+            options={skills}
+            name={field}
+            validate={validateSingleSkill}
+          />
         </li>
       ))}
     </ul>
+    {dirty && <div>{error}</div>}
     <button type="button" onClick={() => fields.push({})}>
       add skill
     </button>
