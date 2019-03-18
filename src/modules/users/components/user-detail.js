@@ -5,10 +5,7 @@ import { Link } from "@salsita/react-router";
 
 import { getCurrentUser } from "modules/users/user-selectors";
 import { USER_LIST } from "modules/router/routes";
-//import { UserForm } from "modules/users/components/user-form";
 import { UserUpdate } from "modules/users/components/user-update";
-
-import { UserActionCreators } from "modules/users/user-actions";
 
 const DumbUserDetail = ({ user }) => {
   if (!user) {

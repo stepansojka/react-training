@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "@salsita/react-router";
 
-import { UserActionCreators } from "modules/users/user-actions";
 import { getUserList } from "modules/users/user-selectors";
 
 import { USER_DETAIL } from "modules/router/routes";

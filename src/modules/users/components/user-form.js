@@ -5,7 +5,7 @@ import { FormFieldSelect } from "@salsita/react-forms";
 import { FormValidations } from "@salsita/react-forms";
 import { connect } from "react-redux";
 
-import { getCurrentUser, getSkillList } from "modules/users/user-selectors";
+import { getSkillList } from "modules/users/user-selectors";
 
 const validateFirstName = FormValidations.notEmptyString(
   "first name cannot be empty"
