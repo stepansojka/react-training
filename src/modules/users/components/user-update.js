@@ -6,10 +6,7 @@ import { UserActionCreators } from "modules/users/user-actions";
 import { getCurrentUser } from "modules/users/user-selectors";
 
 const DumbUserUpdate = ({ currentUser, saveUser }) => (
-  <UserUpdateForm
-    initialValues={currentUser}
-    onSubmit={thing => console.log("in form:", thing) || saveUser(thing)}
-  />
+  <UserUpdateForm initialValues={currentUser} onSubmit={saveUser} />
 );
 
 const mapStateToProps = state => ({
