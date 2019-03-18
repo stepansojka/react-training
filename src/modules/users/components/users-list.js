@@ -9,7 +9,7 @@ import { getUserList } from "modules/users/user-selectors";
 import { USER_DETAIL } from "modules/router/routes";
 import { UserCreate } from "modules/users/components/user-create";
 
-const DumbUserList = ({ users, addUser }) => (
+const DumbUserList = ({ users }) => (
   <div>
     <ul>
       {users.map(user => (
@@ -39,11 +39,4 @@ const mapStateToProps = state => ({
   users: getUserList(state)
 });
 
-const mapDispatchToProps = {
-  addUser: UserActionCreators.saveUser
-};
-
-export const UserList = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DumbUserList);
+export const UserList = connect(mapStateToProps)(DumbUserList);

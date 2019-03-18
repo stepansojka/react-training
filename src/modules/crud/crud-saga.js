@@ -1,5 +1,6 @@
 import {
   saveUser,
+  updateUser,
   fetchUser,
   fetchUsers,
   fetchSkills
@@ -13,10 +14,17 @@ import * as Routes from "modules/router/routes";
 export const mapEntityToSaveParams = (entity, isUpdate) => {
   switch (entity) {
     case USER:
-      return {
-        effect: saveUser,
-        schema: user
-      };
+      if (isUpdate) {
+        return {
+          effect: updateUser,
+          schema: user
+        };
+      } else {
+        return {
+          effect: saveUser,
+          schema: user
+        };
+      }
     default:
       return {};
   }
