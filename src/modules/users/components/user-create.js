@@ -2,10 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { UserForm } from "modules/users/components/user-form";
+import { UserCreateForm } from "modules/users/components/user-form";
 import { UserActionCreators } from "modules/users/user-actions";
 
-const DumbUserCreate = ({ saveUser }) => <UserForm onSubmit={saveUser} />;
+const DumbUserCreate = ({ saveUser }) => <UserCreateForm onSubmit={saveUser} />;
 
 const mapStateToProps = state => ({});
 

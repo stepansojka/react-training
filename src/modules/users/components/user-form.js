@@ -70,10 +70,9 @@ const mapStateToProps = state => ({
   skills: getSkillList(state)
 });
 
-// export const UserForm = connect(state => ({
-//   initialValues: { firstName: "emil" }
-// }))(reduxForm({ form: "user" })(connect(mapStateToProps)(UserFormInternal)));
+const userForm = name =>
+  reduxForm({ form: name })(connect(mapStateToProps)(UserFormInternal));
 
-export const UserForm = reduxForm({ form: "user" })(
-  connect(mapStateToProps)(UserFormInternal)
-);
+export const UserCreateForm = userForm("createUser");
+
+export const UserUpdateForm = userForm("updateUser");
