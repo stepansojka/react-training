@@ -64,12 +64,26 @@ app.get("/users", (req, res) => {
 
 app.get("/skills", (req, res) => res.json(allSkills));
 
-app.get("/users/:id", (req, res) => res.json(users[req.params.id]));
+app.get("/users/:id", (req, res) => {
+  if (!users[req.params.id]) {
+    res.send(404);
+    return;
+  }
+
+  res.json(users[req.params.id]);
+});
 
 app.patch("/users/:id", (req, res) => {
+  if (!users[req.params.id]) {
+    res.send(404);
+    return;
+  }
+
   const update = req.body;
   const id = req.params.id;
   const user = users[id];
+
+  console.log(update.skills);
 
   users[id] = {
     ...user,

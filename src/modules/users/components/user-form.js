@@ -5,7 +5,7 @@ import { FormFieldSelect } from "@salsita/react-forms";
 import { FormValidations } from "@salsita/react-forms";
 import { connect } from "react-redux";
 
-import { getSkillList } from "modules/users/user-selectors";
+import { getSkills } from "modules/entities/entities-selectors";
 
 const validateFirstName = FormValidations.notEmptyString(
   "first name cannot be empty"
@@ -19,7 +19,7 @@ const validateSkills = skills => {
     return "a user has to have at least one skill";
   }
 
-  const uniqueSkills = new Set(skills);
+  const uniqueSkills = new Set(skills.map(skill => skill.id));
   if (uniqueSkills.size < skills.length) {
     return "skills have to be unique";
   }
@@ -42,6 +42,7 @@ const renderSkills = ({ fields, skills, meta: { error, dirty } }) => (
             options={skills}
             name={field}
             validate={validateSingleSkill}
+            labelKey="name"
           />
         </li>
       ))}
@@ -78,7 +79,7 @@ const UserFormInternal = ({ handleSubmit, skills }) => (
 );
 
 const mapStateToProps = state => ({
-  skills: getSkillList(state)
+  skills: getSkills(state)
 });
 
 const userForm = name =>
