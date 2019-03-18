@@ -5,7 +5,8 @@ const app = express();
 
 app.use(bodyParser.json());
 
-let users = [];
+let userCount = 0;
+let users = {};
 
 const donutEating = {
   id: "skill-1",
@@ -30,16 +31,17 @@ const userSkill = (skill, regnalNumber) => ({
 });
 
 const computeRegnalNumber = name =>
-  users.reduce(
-    (count, user) => (user.firstName === name ? count + 1 : count),
+  Object.keys(users).reduce(
+    (count, userId) => (users[userId].firstName === name ? count + 1 : count),
     1
   );
 
 const createUser = ({ firstName, lastName, skills }) => {
   const regnalNumber = computeRegnalNumber(firstName);
+  const id = `user-${userCount}`;
 
   return {
-    id: `user-${users.length}`,
+    id,
     firstName,
     lastName,
     regnalNumber,
@@ -47,18 +49,24 @@ const createUser = ({ firstName, lastName, skills }) => {
   };
 };
 
-const getUser = id => users.find(user => user.id === id);
-
 app.get("/users", (req, res) => res.json(users));
 
 app.get("/skills", (req, res) => res.json(allSkills));
 
-app.get("/users/:id", (req, res) => res.json(getUser(req.params.id)));
+app.get("/users/:id", (req, res) => res.json(users[req.params.id]));
+
+app.patch("/users/:id", (req, res) => {
+  const user = { ...req.body, id: req.params.id };
+  users[req.params.id] = user;
+
+  res.json(user);
+});
 
 app.post("/users", (req, res) => {
   const user = createUser(req.body);
 
-  users = [...users, user];
+  users[user.id] = user;
+  userCount += 1;
 
   res.json(user);
 });
