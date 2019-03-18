@@ -10,8 +10,8 @@ export const fetchUser = wrapApiCall(userId =>
 
 export const saveUser = wrapApiCall(user => ApiClient.post("/users", user));
 
-export const updateUser = wrapApiCall(user =>
-  ApiClient.patch(`/users/${user.id}`, user)
+export const updateUser = wrapApiCall((user, id) =>
+  ApiClient.patch(`/users/${id}`, user)
 );
 
 export const fetchSkills = wrapApiCall(() => ApiClient.get("/skills"));
