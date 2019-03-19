@@ -19,17 +19,6 @@ const getNormalizedUserSkills = createSelector(
   entities => entities.userSkills
 );
 
-export const getSkillList = createSelector(
-  getSkills,
-  skills =>
-    skills
-      ? Object.keys(skills).reduce(
-          (skillList, key) => [...skillList, skills[key]],
-          []
-        )
-      : []
-);
-
 const getUserSkills = createSelector(
   getNormalizedUserSkills,
   getSkills,
