@@ -5,7 +5,7 @@ import { FormFieldSelect } from "@salsita/react-forms";
 import { FormValidations } from "@salsita/react-forms";
 import { connect } from "react-redux";
 
-import { getSkills } from "modules/entities/entities-selectors";
+import { getSkillList } from "modules/entities/entities-selectors";
 
 const validateFirstName = FormValidations.notEmptyString(
   "first name cannot be empty"
@@ -15,7 +15,7 @@ const validateLastName = FormValidations.notEmptyString(
 );
 
 const validateSkills = skills => {
-  if (!Boolean(skills)) {
+  if (!skills) {
     return "a user has to have at least one skill";
   }
 
@@ -79,7 +79,7 @@ const UserFormInternal = ({ handleSubmit, skills }) => (
 );
 
 const mapStateToProps = state => ({
-  skills: getSkills(state)
+  skills: getSkillList(state)
 });
 
 const userForm = name =>

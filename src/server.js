@@ -41,7 +41,7 @@ const computeRegnalNumber = name =>
 
 const createUser = ({ firstName, lastName, skills }) => {
   const regnalNumber = computeRegnalNumber(firstName);
-  const id = `user-${userCount}`;
+  const id = `user-${Object.keys(users).length}`;
 
   userCount += 1;
 
@@ -64,32 +64,30 @@ app.get("/users", (req, res) => {
 
 app.get("/skills", (req, res) => res.json(allSkills));
 
-app.get("/users/:id", (req, res) => {
-  if (!users[req.params.id]) {
-    res.send(404);
-    return;
-  }
-
-  res.json(users[req.params.id]);
-});
-
-app.patch("/users/:id", (req, res) => {
-  if (!users[req.params.id]) {
-    res.send(404);
-    return;
-  }
-
-  const update = req.body;
-  const id = req.params.id;
+app.get("/users/:id", ({ params: { id } }, res) => {
   const user = users[id];
 
-  console.log(update.skills);
+  if (!user) {
+    res.send(404);
+    return;
+  }
+
+  res.json(user);
+});
+
+app.patch("/users/:id", ({ params: { id }, body }, res) => {
+  const user = users[id];
+
+  if (!user) {
+    res.send(404);
+    return;
+  }
 
   users[id] = {
     ...user,
-    firstName: update.firstName,
-    lastName: update.lastName,
-    skills: userSkills(update.skills, user.regnalNumber)
+    firstName: body.firstName,
+    lastName: body.lastName,
+    skills: userSkills(body.skills, user.regnalNumber)
   };
 
   res.json(users[id]);

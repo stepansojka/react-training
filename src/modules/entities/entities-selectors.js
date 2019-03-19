@@ -4,7 +4,7 @@ const getEntities = state => {
   return state.entities;
 };
 
-export const getNormalizedSkills = createSelector(
+export const getSkills = createSelector(
   getEntities,
   entities => entities.skills
 );
@@ -19,12 +19,12 @@ const getNormalizedUserSkills = createSelector(
   entities => entities.userSkills
 );
 
-export const getSkills = createSelector(
-  getNormalizedSkills,
-  normalizedSkills =>
-    normalizedSkills
-      ? Object.keys(normalizedSkills).reduce(
-          (skills, key) => [...skills, normalizedSkills[key]],
+export const getSkillList = createSelector(
+  getSkills,
+  skills =>
+    skills
+      ? Object.keys(skills).reduce(
+          (skillList, key) => [...skillList, skills[key]],
           []
         )
       : []
@@ -32,7 +32,7 @@ export const getSkills = createSelector(
 
 const getUserSkills = createSelector(
   getNormalizedUserSkills,
-  getNormalizedSkills,
+  getSkills,
   (normalizedUserSkills, skills) => {
     if (!normalizedUserSkills) return {};
 

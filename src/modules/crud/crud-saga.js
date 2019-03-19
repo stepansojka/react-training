@@ -14,17 +14,10 @@ import * as Routes from "modules/router/routes";
 export const mapEntityToSaveParams = (entity, isUpdate) => {
   switch (entity) {
     case USER:
-      if (isUpdate) {
-        return {
-          effect: updateUser,
-          schema: user
-        };
-      } else {
-        return {
-          effect: saveUser,
-          schema: user
-        };
-      }
+      return {
+        effect: isUpdate ? updateUser : saveUser,
+        schema: user
+      };
     default:
       return {};
   }
