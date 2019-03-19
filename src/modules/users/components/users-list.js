@@ -3,11 +3,12 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "@salsita/react-router";
 
-import { UserActionCreators } from "modules/users/user-actions";
 import { getUserList } from "modules/users/user-selectors";
-import { USER_DETAIL } from "modules/router/routes";
 
-const DumbUserList = ({ users, addUser }) => (
+import { USER_DETAIL } from "modules/router/routes";
+import { UserCreate } from "modules/users/components/user-create";
+
+const DumbUserList = ({ users }) => (
   <div>
     <ul>
       {users.map(user => (
@@ -18,14 +19,7 @@ const DumbUserList = ({ users, addUser }) => (
         </li>
       ))}
     </ul>
-    <button
-      onClick={() => addUser({ firstName: "Homer", lastName: "Simpson" })}
-    >
-      Homer
-    </button>
-    <button onClick={() => addUser({ firstName: "Lisa", lastName: "Simpson" })}>
-      Lisa
-    </button>
+    <UserCreate />
   </div>
 );
 
@@ -44,11 +38,4 @@ const mapStateToProps = state => ({
   users: getUserList(state)
 });
 
-const mapDispatchToProps = {
-  addUser: UserActionCreators.addUser
-};
-
-export const UserList = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DumbUserList);
+export const UserList = connect(mapStateToProps)(DumbUserList);

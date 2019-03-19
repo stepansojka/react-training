@@ -1,11 +1,10 @@
 import { createSelector } from "reselect";
 
 const getEntities = state => {
-  //  console.log(state);
   return state.entities;
 };
 
-const getSkills = createSelector(
+export const getSkills = createSelector(
   getEntities,
   entities => entities.skills
 );
@@ -42,8 +41,6 @@ export const getUsers = createSelector(
   getNormalizedUsers,
   getUserSkills,
   (normalizedUsers, userSkills) => {
-    console.log("normalized users:", normalizedUsers);
-
     if (!normalizedUsers) return {};
 
     return Object.keys(normalizedUsers).reduce((users, key) => {

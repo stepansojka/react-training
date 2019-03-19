@@ -5,7 +5,8 @@ const app = express();
 
 app.use(bodyParser.json());
 
-let users = [];
+let userCount = 0;
+let users = {};
 
 const donutEating = {
   id: "skill-1",
@@ -22,47 +23,80 @@ const reading = {
   name: "reading philosophy books"
 };
 
+const allSkills = [donutEating, saxophonePlaying, reading];
+
 const userSkill = (skill, regnalNumber) => ({
   skill,
   level: Math.pow(2, regnalNumber)
 });
 
-const getSkills = (name, regnalNumber) => {
-  const skills =
-    name.toLowerCase() === "lisa" ? [saxophonePlaying, reading] : [donutEating];
-
-  return skills.map(skill => userSkill(skill, regnalNumber));
-};
+const userSkills = (skills, regnalNumber) =>
+  skills.map(skill => userSkill(skill, regnalNumber));
 
 const computeRegnalNumber = name =>
-  users.reduce(
-    (count, user) => (user.firstName === name ? count + 1 : count),
+  Object.keys(users).reduce(
+    (count, userId) => (users[userId].firstName === name ? count + 1 : count),
     1
   );
 
-const createUser = ({ firstName, lastName }) => {
+const createUser = ({ firstName, lastName, skills }) => {
   const regnalNumber = computeRegnalNumber(firstName);
+  const id = `user-${Object.keys(users).length}`;
+
+  userCount += 1;
 
   return {
-    id: `user-${users.length}`,
+    id,
     firstName,
     lastName,
     regnalNumber,
-    skills: getSkills(firstName, regnalNumber)
+    skills: userSkills(skills, regnalNumber)
   };
 };
 
-const getUser = id => users.find(user => user.id === id);
+app.get("/users", (req, res) => {
+  const u = Object.keys(users).reduce(
+    (userArray, userId) => [...userArray, users[userId]],
+    []
+  );
+  res.json(u);
+});
 
-app.get("/users", (req, res) => res.json(users));
+app.get("/skills", (req, res) => res.json(allSkills));
 
-app.get("/users/:id", (req, res) => res.json(getUser(req.params.id)));
+app.get("/users/:id", ({ params: { id } }, res) => {
+  const user = users[id];
+
+  if (!user) {
+    res.send(404);
+    return;
+  }
+
+  res.json(user);
+});
+
+app.patch("/users/:id", ({ params: { id }, body }, res) => {
+  const user = users[id];
+
+  if (!user) {
+    res.send(404);
+    return;
+  }
+
+  users[id] = {
+    ...user,
+    firstName: body.firstName,
+    lastName: body.lastName,
+    skills: userSkills(body.skills, user.regnalNumber)
+  };
+
+  res.json(users[id]);
+});
 
 app.post("/users", (req, res) => {
   const user = createUser(req.body);
 
-  users = [...users, user];
-
+  users[user.id] = user;
   res.json(user);
 });
 

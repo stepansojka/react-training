@@ -5,6 +5,7 @@ import { Link } from "@salsita/react-router";
 
 import { getCurrentUser } from "modules/users/user-selectors";
 import { USER_LIST } from "modules/router/routes";
+import { UserUpdate } from "modules/users/components/user-update";
 
 const DumbUserDetail = ({ user }) => {
   if (!user) {
@@ -16,16 +17,7 @@ const DumbUserDetail = ({ user }) => {
   } else {
     return (
       <div>
-        <h1>
-          {user.firstName} {user.regnalNumber} {user.lastName}
-        </h1>
-        <ul>
-          {user.skills.map(skill => (
-            <li key={user.id + "_" + skill.skill.id}>
-              {skill.skill.name}: level {skill.level}
-            </li>
-          ))}
-        </ul>
+        <UserUpdate />
         <Link name={USER_LIST.name}>BACK</Link>
       </div>
     );
@@ -43,8 +35,7 @@ DumbUserDetail.propTypes = {
         skill: PropTypes.shape({
           id: PropTypes.string.isRequired,
           name: PropTypes.string.isRequired
-        }),
-        level: PropTypes.number.isRequired
+        })
       }).isRequired
     ).isRequired
   })
